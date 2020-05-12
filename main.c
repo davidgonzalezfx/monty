@@ -1,25 +1,92 @@
 #include "monty.h"
 
-int validate_opcode(char *s)
+int validate_opcode(global *initial, char *s)
 {
-	instruction_t opcodes[] = {
-		{"push", add_dnodeint_end},
-		{"pint", add_dnodeint_end},
-		{"pop", add_dnodeint_end},
-		{"swap", add_dnodeint_end},
-		{"add", add_dnodeint_end},
-		{"nop", add_dnodeint_end} 
-	};
+	int iter = 0;
+	instruction_t pcodes[9] = {
+		{"pall", pall}, {"pint", pint}, {"pop", pop},
+		{"swap", swap}, {"add", add}, {"nop", NULL},
+		{"push", push}, {"queue", NULL}, {"stack", NULL}};
+
+	if (strcmp(s, opcodes[6][0]) == 0)
+	{
+		initial->op_code = s;
+		return (0);
+	}
+	if (strcmp(s, opcodes[7][0]) == 0)
+	{
+		initial->mode = 1;
+		return (1);
+	}
+	if (strcmp(s, opcodes[8][0]) == 0)
+	{
+		initial->mode = 0;
+		return (1);
+	}
+
+	while (iter <= 6)
+	{
+		if (strcmp(s, opcodes[iter][0]) == 0)
+		{
+			initial->op_code = s;
+			return (1);
+		}
+		iter++;
+	}
+	initial->op_code = s;
+	print_error_num(initial);
+	return (-1);
 }
 
+void print_error_num(global *initial)
+{
+	if (strcmp(initial->op_code, "push") == 0)
+		dprintf(2, "L%d: usage: push integer\n", initial->line_cnt);
+	else
+		dprintf(2, "L%d: unknown instruction: %s\n", initial->line_cnt, initial->op_code);
+	exit(EXIT_FAILURE);
+}
+
+void temp(char *toks, int tok_cnt, global *initial)
+{
+	while (toks && tok_cnt < 2)
+	{
+		if (tok_cnt == 0)
+		{
+			/* validar por stack - queue or op_code */
+			int is_valid = validate_opcode(initial ,toks);
+			if(is_valid == 0)
+				tok_cnt++;
+			else
+				tok_cnt = 2;
+		}
+		if (tok_cnt == 1)
+		{
+			/* validar que sea número */
+			toks = strtok(NULL, " \t\n");
+			if (atoi(toks) != 0)
+				initial->number = atoi(toks);				
+			else
+				print_error_num(initial);
+			tok_cnt++;
+		}
+		/* ejecutar instrucción */
+	}
+}
 
 int main (int ac, char **av)
 {
-	stack_t *stack = NULL;
+	/* stack_t *stack = NULL; */
 	FILE *monty_file;
 	char *readed = NULL, *toks = NULL;
-	int line_cnt = 0, tok_cnt = 0;
+	int tok_cnt = 0;
 	size_t len = 0;
+
+	global initial;
+	initial.mode = 0;
+	initial.op_code = NULL;
+	initial.number = 0;
+	initial.line_cnt = 0;
 
 	if (ac != 2)
 	{
@@ -37,19 +104,10 @@ int main (int ac, char **av)
 	while (getline(&readed, &len, monty_file) != -1)
 	{
 		toks = strtok(readed, " \t\n");
-		while (toks && tok_cnt < 2)
-		{
-			if (tok_cnt == 1)
-			{
-				toks
-			}
-			printf ("lei el archivo: %s\n", toks);
-			toks = strtok(NULL, " \t\n");
-			tok_cnt++;
-		}
-		line_cnt++;
+		temp(toks, tok_cnt, &init);
+		initial.line_cnt++;
+		printf ("%d\n", initial.line_cnt);
 		tok_cnt = 0;
-		printf ("%d\n", line_cnt);
 	}
 
 	return (0);

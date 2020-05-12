@@ -6,6 +6,21 @@
 #include <string.h>
 
 /**
+ * struct dat - handle variables to modes
+ * @mode: the monty mode
+ * @opcode: first token to validar with commands
+ * @number: integer to put in the stack or queue
+ * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
+typedef struct dat {
+	int mode;
+	char *op_code;
+	int number;
+	int line_cnt;
+} global;
+
+/**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
  * @prev: points to the previous element of the stack (or queue)
@@ -41,5 +56,7 @@ stack_t *add_dnodeint_end(stack_t **head, const int n);
 void free_dlistint(stack_t *head);
 int delete_dnodeint_at_index(stack_t **head, unsigned int index);
 size_t print_dlistint(const stack_t *h);
+
+void print_error_num(global *initial);
 
 #endif /* MONTY_H */
