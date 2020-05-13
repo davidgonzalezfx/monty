@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <ctype.h>
 /**
  * struct dat - handle variables to modes
  * @mode: the monty mode
@@ -21,6 +21,8 @@ typedef struct dat
 	int number;
 	int line_cnt;
 } global;
+
+extern global initial;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -53,11 +55,15 @@ typedef struct instruction_s
 } instruction_t;
 
 /* stack_aux_funs.c */
-int delete_dnodeint_at_index(stack_t **head, unsigned int index);
+int delete_dnodeint_at_end(stack_t **head);
 stack_t *add_dnodeint_end(stack_t **head, const int n);
 stack_t *add_dnodeint(stack_t **head, const int n);
-size_t print_dlistint(const stack_t *h);
+size_t print_dlistint(stack_t *h);
 void free_dlistint(stack_t *head);
+
+/* stack_aux2_funs.c */
+size_t dlistint_len(const stack_t *h);
+int is_num(char *token);
 
 /* stack_core_funs.c */
 void swap(stack_t **stack, unsigned int line_number);
@@ -67,10 +73,10 @@ void pop(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 
 /* stack_logic_funs.c */
-int validate_opcode(global *initial, char *s, instruction_t opcodes[]);
-void monty_logic(char *toks, int tok_cnt, global *initial);
+int validate_opcode(char *s, instruction_t opcodes[]);
+void monty_logic(char *toks, int tok_cnt, stack_t **head, instruction_t opcodes[]);
 void empty(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
-void handle_errors(global *initial);
+void handle_errors(void);
 
 #endif /* MONTY_H */

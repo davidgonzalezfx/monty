@@ -17,22 +17,24 @@ void empty(stack_t **stack, unsigned int line_number)
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
 	(void)line_number;
-	printf("push called\n");
+	if (initial.mode == 0)
+		add_dnodeint_end(stack, initial.number);
+	else
+		add_dnodeint(stack, initial.number);
 }
 /**
  * handle_errors - print errors handler
  * @initial: global struct
  * Return: void
  */
-void handle_errors(global *initial)
+void handle_errors(void)
 {
-	if (strcmp(initial->op_code, "push") == 0)
-		dprintf(2, "L%d: usage: push integer\n", initial->line_cnt);
+	if (strcmp(initial.op_code, "push") == 0)
+		dprintf(2, "L%d: usage: push integer\n", initial.line_cnt);
 	else
-		dprintf(2, "L%d: unknown instruction: %s\n", initial->line_cnt,
-				initial->op_code);
+		dprintf(2, "L%d: unknown instruction: %s\n", initial.line_cnt,
+				initial.op_code);
 	exit(EXIT_FAILURE);
 }
 
@@ -46,23 +48,23 @@ void handle_errors(global *initial)
  * 1 if command don't requires
  * -1 if command isn't valid
  */
-int validate_opcode(global *initial, char *s, instruction_t opcodes[])
+int validate_opcode(char *s, instruction_t opcodes[])
 {
 	int iter = 0;
 
 	if (strcmp(s, opcodes[6].opcode) == 0)
 	{
-		initial->op_code = s;
+		initial.op_code = s;
 		return (6);
 	}
 	if (strcmp(s, opcodes[7].opcode) == 0)
 	{
-		initial->mode = 1;
+		initial.mode = 1;
 		return (7);
 	}
 	if (strcmp(s, opcodes[8].opcode) == 0)
 	{
-		initial->mode = 0;
+		initial.mode = 0;
 		return (8);
 	}
 
@@ -70,13 +72,13 @@ int validate_opcode(global *initial, char *s, instruction_t opcodes[])
 	{
 		if (strcmp(s, opcodes[iter].opcode) == 0)
 		{
-			initial->op_code = s;
+			initial.op_code = s;
 			return (iter);
 		}
 		iter++;
 	}
-	initial->op_code = s;
-	handle_errors(initial);
+	initial.op_code = s;
+	handle_errors();
 	return (-1);
 }
 
@@ -86,20 +88,16 @@ int validate_opcode(global *initial, char *s, instruction_t opcodes[])
  * @tok_cnt: tokens counter
  * @initial: global struct
  */
-void monty_logic(char *toks, int tok_cnt, global *initial)
+void monty_logic(char *toks, int tok_cnt, stack_t **head, instruction_t opcodes[])
 {
 	int is_valid;
-	instruction_t opcodes[9] = {
-		{"pall", pall}, {"pint", pint}, {"pop", pop},
-		{"swap", swap}, {"add", add}, {"nop", empty},
-		{"push", push}, {"queue", empty}, {"stack", empty}};
 
 	while (toks && tok_cnt < 2)
 	{
 		if (tok_cnt == 0)
 		{
 			/* validar por stack - queue or op_code */ /* *opcodes[] */
-			is_valid = validate_opcode(initial, toks, opcodes);
+			is_valid = validate_opcode(toks, opcodes);
 
 			if (is_valid == 6)
 				tok_cnt = 1;
@@ -110,15 +108,14 @@ void monty_logic(char *toks, int tok_cnt, global *initial)
 		{
 			/* validar que sea número */
 			toks = strtok(NULL, " \t\n");
-			if (atoi(toks) != 0)
-				initial->number = atoi(toks);
+			/* printf("line number is: %d\n",initial.line_cnt);*/
+			if (is_num(toks) == 1)
+				initial.number = atoi(toks);
 			else
-				handle_errors(initial);
+				handle_errors();
 			tok_cnt++;
 		}
 		/* ejecutar instrucción */
-		stack_t **none = NULL;
-
-		opcodes[is_valid].f(none, initial->line_cnt);
+		opcodes[is_valid].f(head, initial.line_cnt);
 	}
 }

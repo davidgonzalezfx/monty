@@ -6,9 +6,8 @@
  */
 void pall(stack_t **stack, unsigned int line_number)
 {
-	(void) stack;
 	(void) line_number;
-	printf("pall called\n");
+	print_dlistint(*stack);
 }
 /**
  * pint - print int
@@ -17,9 +16,24 @@ void pall(stack_t **stack, unsigned int line_number)
  */
 void pint(stack_t **stack, unsigned int line_number)
 {
-	(void) stack;
 	(void) line_number;
-	printf("pint called\n");
+	stack_t *aux = *stack;
+
+	if (!(*stack))
+	{
+		printf("L%d : can't pint, stack empty", initial.line_cnt);
+		exit(EXIT_FAILURE);
+	}
+	
+	if (!(*stack)->next)
+	{
+		printf("%d\n", (*stack)->n);
+		return;
+	}
+
+	while (aux->next)
+		aux = aux->next;
+	printf("%d\n", aux->n);
 }
 /**
  * pop - remove element from stack/queue
@@ -28,9 +42,8 @@ void pint(stack_t **stack, unsigned int line_number)
  */
 void pop(stack_t **stack, unsigned int line_number)
 {
-	(void) stack;
 	(void) line_number;
-	printf("pop called\n");
+	delete_dnodeint_at_end(stack);
 }
 /**
  * swap - swap last two elements

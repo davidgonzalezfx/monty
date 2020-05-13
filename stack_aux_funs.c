@@ -29,33 +29,26 @@ stack_t *add_dnodeint(stack_t **head, const int n)
  */
 stack_t *add_dnodeint_end(stack_t **head, const int n)
 {
-	stack_t *new_node = malloc(sizeof(stack_t));
-	stack_t *actual;
+	stack_t *newnode, *aux = *head;
 
-	if (!new_node || !head)
+	newnode = malloc(sizeof(stack_t));
+	if (!newnode)
 		return (NULL);
-
-	new_node->n = n;
-
-	if (!(*head))
+	newnode->n = n;
+	newnode->next = NULL;
+	newnode->prev = NULL;
+	if (!*head)
 	{
-		*head = new_node;
-		new_node->prev = NULL;
+		*head = newnode;
+		return (newnode);
 	}
-	else
-	{
-		actual = *head;
-
-		while (actual->next)
-			actual = actual->next;
-
-		new_node->next = NULL;
-		new_node->prev = actual;
-		actual->next = new_node;
-	}
-
-	return (new_node);
+	while (aux->next)
+		aux = aux->next;
+	aux->next = newnode;
+	newnode->prev = aux;
+	return (newnode);
 }
+
 /**
  * free_dlistint - free a stack_t list
  * @head: doubly linkedlist
@@ -63,75 +56,87 @@ stack_t *add_dnodeint_end(stack_t **head, const int n)
  */
 void free_dlistint(stack_t *head)
 {
-	stack_t *actual = head;
+	stack_t *aux = head;
 
-	while (head)
+	if (!head)
+		return;
+	while (aux->next)
 	{
-		actual = head;
-		head = actual->next;
-		free(actual);
+		aux = aux->next;
+		free(head);
+		head = aux;
 	}
+	free(aux);
 }
 /**
- * delete_dnodeint_at_index - deletes the node at index index
+ * delete_dnodeint_at_end - deletes the node at end
  * @head: doubly linkedlist
- * @index: index to remove node
  * Return: 1 if removed, -1 if fails
  */
-int delete_dnodeint_at_index(stack_t **head, unsigned int index)
+int delete_dnodeint_at_end(stack_t **head)
 {
-	stack_t *actual = *head;
-	unsigned int cnt;
+	stack_t *aux = *head, *aux2 = aux;
+	int index = dlistint_len(*head) - 1;
+	int iter = 0;
 
-	if (!head || !actual)
+	if (!*head)
 		return (-1);
-
 	if (index == 0)
 	{
-		actual = actual->next;
-		free(*head);
-		*head = actual;
-		if (*head)
-			(*head)->prev = NULL;
+		*head = aux->next;
+		if (aux->next != NULL)
+			aux->next->prev = NULL;
+		free(aux);
 		return (1);
 	}
-	for (cnt = 0; actual; cnt++)
+	while (aux)
 	{
-		if (cnt == index)
+		if (!aux->next && iter == index)
 		{
-			if (actual->next)
-			{
-				(actual->prev)->next = actual->next;
-				(actual->next)->prev = actual->prev;
-				free(actual);
-				return (1);
-			}
-			else
-			{
-				(actual->prev)->next = NULL;
-				free(actual);
-				return (1);
-			}
+			aux2 = aux->prev;
+			aux2->next = NULL;
+			return (free(aux), 1);
 		}
-		actual = actual->next;
+		if (iter == index)
+		{
+			aux2 = aux->prev;
+			aux2->next = aux->next;
+			aux->next->prev = aux2;
+			free(aux);
+			return (1);
+		}
+		aux = aux->next;
+		iter++;
 	}
-
 	return (-1);
 }
+
 /**
  * print_dlistint - prints all the elements of a stack_t list
  * @h: doubly linkedlist
  * Return: number of nodes
  */
-size_t print_dlistint(const stack_t *h)
+size_t print_dlistint(stack_t *h)
 {
 	size_t num_nodes = 0;
+	stack_t *aux = h;
 
-	while (h)
+	if (!h)
+		return (0);
+	
+	if (!h->next)
 	{
-		printf("%i\n", h->n);
+		return (printf("%d\n", h->n), 0);
+	}
+
+	while (aux->next)
+		aux = aux->next;
+
+	while (aux)
+	{
+		printf("%i\n", aux->n);
 		num_nodes++;
-		h = h->next;
+		aux = aux->prev;
 	}
 
 	return (num_nodes);

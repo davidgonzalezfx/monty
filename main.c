@@ -1,5 +1,7 @@
 #include "monty.h"
 
+global initial;
+
 /**
  * main - main function
  * Description: global struct created
@@ -15,12 +17,17 @@ int main(int ac, char **av)
 	char *readed = NULL, *toks = NULL;
 	int tok_cnt = 0;
 	size_t len = 0;
-	global initial;
 
 	initial.mode = 0;
 	initial.op_code = NULL;
 	initial.number = 0;
-	initial.line_cnt = 0;
+	initial.line_cnt = 1;
+
+	stack_t *head = NULL;
+	instruction_t opcodes[9] = {
+		{"pall", pall}, {"pint", pint}, {"pop", pop},
+		{"swap", swap}, {"add", add}, {"nop", empty},
+		{"push", push}, {"queue", empty}, {"stack", empty}};
 
 	if (ac != 2)
 	{
@@ -36,10 +43,12 @@ int main(int ac, char **av)
 	while (getline(&readed, &len, monty_file) != -1)
 	{
 		toks = strtok(readed, " \t\n");
-		monty_logic(toks, tok_cnt, &initial);
+		monty_logic(toks, tok_cnt, &head, opcodes);
 		initial.line_cnt++;
 		tok_cnt = 0;
 	}
-
+	free_dlistint(head);
+	free(readed);
+	fclose(monty_file);
 	return (0);
 }
