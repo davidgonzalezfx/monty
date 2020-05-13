@@ -32,7 +32,7 @@ void handle_errors(void)
 	if (strcmp(initial.op_code, "push") == 0)
 		dprintf(2, "L%d: usage: push integer\n", initial.line_cnt);
 	else
-		dprintf(2, "L%d: unknown instruction: %s\n", initial.line_cnt,
+		dprintf(2, "L%d: unknown instruction %s\n", initial.line_cnt,
 				initial.op_code);
 	free_dlistint(initial.head);
 	free(initial.readed);
