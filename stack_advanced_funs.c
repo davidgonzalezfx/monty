@@ -23,7 +23,7 @@ void sub(stack_t **stack, unsigned int line_number)
 
 	while (aux->next)
 		aux = aux->next;
-	tmp = aux->n - aux->prev->n;
+	tmp = aux->prev->n - aux->n;
 	aux->prev->n = tmp;
 	delete_dnodeint_at_end(stack);
 }
