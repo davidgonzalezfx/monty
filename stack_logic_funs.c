@@ -25,7 +25,6 @@ void push(stack_t **stack, unsigned int line_number)
 }
 /**
  * handle_errors - print errors handler
- * @initial: global struct
  * Return: void
  */
 void handle_errors(void)
@@ -41,7 +40,6 @@ void handle_errors(void)
 /**
  * validate_opcode - function that validates
  * first token against valid option
- * @initial: global structure
  * @s: first token of line
  * @opcodes: dictonary with valid opcodes
  * Return: 0 if command expect second argument
@@ -86,9 +84,11 @@ int validate_opcode(char *s, instruction_t opcodes[])
  * monty_logic - all logic of monty project
  * @toks: actual token
  * @tok_cnt: tokens counter
- * @initial: global struct
+ * @head: head of stack/queue
+ * @opcodes: valid opcodes dictonary
  */
-void monty_logic(char *toks, int tok_cnt, stack_t **head, instruction_t opcodes[])
+void monty_logic(char *toks, int tok_cnt, stack_t **head,
+				instruction_t opcodes[])
 {
 	int is_valid;
 

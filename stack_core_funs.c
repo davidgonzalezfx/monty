@@ -24,7 +24,7 @@ void pint(stack_t **stack, unsigned int line_number)
 		printf("L%d : can't pint, stack empty", initial.line_cnt);
 		exit(EXIT_FAILURE);
 	}
-	
+
 	if (!(*stack)->next)
 	{
 		printf("%d\n", (*stack)->n);

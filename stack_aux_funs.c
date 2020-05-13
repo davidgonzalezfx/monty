@@ -123,7 +123,7 @@ size_t print_dlistint(stack_t *h)
 
 	if (!h)
 		return (0);
-	
+
 	if (!h->next)
 	{
 		return (printf("%d\n", h->n), 0);

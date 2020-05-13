@@ -74,7 +74,8 @@ void add(stack_t **stack, unsigned int line_number);
 
 /* stack_logic_funs.c */
 int validate_opcode(char *s, instruction_t opcodes[]);
-void monty_logic(char *toks, int tok_cnt, stack_t **head, instruction_t opcodes[]);
+void monty_logic(char *toks, int tok_cnt, stack_t **head,
+				instruction_t opcodes[]);
 void empty(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void handle_errors(void);
