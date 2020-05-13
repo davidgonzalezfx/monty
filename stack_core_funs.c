@@ -58,9 +58,25 @@ void pop(stack_t **stack, unsigned int line_number)
  */
 void swap(stack_t **stack, unsigned int line_number)
 {
-	(void) stack;
-	(void) line_number;
-	printf("swap called\n");
+	stack_t *aux = *stack;
+	int len = dlistint_len(*stack);
+	int tmp;
+	(void)line_number;
+
+	if (len < 2)
+	{
+		dprintf(2, "L%d: can't swap, stack too short\n", initial.line_cnt);
+		free_dlistint(initial.head);
+		free(initial.readed);
+		fclose(initial.monty_file);
+		exit(EXIT_FAILURE);
+	}
+
+	while (aux->next)
+		aux = aux->next;
+	tmp = aux->n;
+	aux->n = aux->prev->n;
+	aux->prev->n = tmp;
 }
 /**
  * add - add last to elements in one
