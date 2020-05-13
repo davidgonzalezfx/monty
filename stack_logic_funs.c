@@ -53,23 +53,23 @@ int validate_opcode(char *s, instruction_t opcodes[])
 {
 	int iter = 0;
 
-	if (strcmp(s, opcodes[11].opcode) == 0)
-	{
-		initial.op_code = s;
-		return (11);
-	}
 	if (strcmp(s, opcodes[12].opcode) == 0)
 	{
-		initial.mode = 1;
+		initial.op_code = s;
 		return (12);
 	}
 	if (strcmp(s, opcodes[13].opcode) == 0)
 	{
-		initial.mode = 0;
+		initial.mode = 1;
 		return (13);
 	}
+	if (strcmp(s, opcodes[14].opcode) == 0)
+	{
+		initial.mode = 0;
+		return (14);
+	}
 
-	while (iter <= 10)
+	while (iter <= 11)
 	{
 		if (strcmp(s, opcodes[iter].opcode) == 0)
 		{
@@ -104,7 +104,7 @@ void monty_logic(char *toks, int tok_cnt, stack_t **head,
 			/* validar por stack - queue or op_code */ /* *opcodes[] */
 			is_valid = validate_opcode(toks, opcodes);
 
-			if (is_valid == 11)
+			if (is_valid == 12)
 				tok_cnt = 1;
 			else
 				tok_cnt = 2;
