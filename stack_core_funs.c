@@ -27,7 +27,6 @@ void pint(stack_t **stack, unsigned int line_number)
 		fclose(initial.monty_file);
 		exit(EXIT_FAILURE);
 	}
-
 	if (!(*stack)->next)
 	{
 		printf("%d\n", (*stack)->n);
@@ -46,7 +45,16 @@ void pint(stack_t **stack, unsigned int line_number)
 void pop(stack_t **stack, unsigned int line_number)
 {
 	(void) line_number;
-	delete_dnodeint_at_end(stack);
+	if (!(*stack))
+	{
+		printf("L%d: can't pop an empty stack\n", initial.line_cnt);
+		free_dlistint(initial.head);
+		free(initial.readed);
+		fclose(initial.monty_file);
+		exit(EXIT_FAILURE);
+	}
+	else
+		delete_dnodeint_at_end(stack);
 }
 /**
  * swap - swap last two elements
