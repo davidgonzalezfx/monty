@@ -29,7 +29,7 @@ void sub(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * div - div last to elements in one
+ * _div - div last to elements in one
  * @stack: stack/queue structure
  * @line_number: line_cnt
  */
@@ -50,15 +50,15 @@ void _div(stack_t **stack, unsigned int line_number)
 	}
 
 	while (aux->next)
-        aux = aux->next;
-        if (aux->n == 0)
-        {
-                dprintf(2, "L%d: division by zero\n", initial.line_cnt);
-                        free_dlistint(initial.head);
-                free(initial.readed);
-                fclose(initial.monty_file);
-                exit(EXIT_FAILURE);
-        }
+		aux = aux->next;
+	if (aux->n == 0)
+	{
+		dprintf(2, "L%d: division by zero\n", initial.line_cnt);
+		free_dlistint(initial.head);
+		free(initial.readed);
+		fclose(initial.monty_file);
+		exit(EXIT_FAILURE);
+	}
 	tmp = aux->prev->n / aux->n;
 	aux->prev->n = tmp;
 	delete_dnodeint_at_end(stack);

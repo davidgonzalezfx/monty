@@ -12,7 +12,6 @@ global initial;
  */
 int main(int ac, char **av)
 {
-	/* stack_t *stack = NULL; */
 	char *toks = NULL;
 	int tok_cnt = 0;
 	size_t len = 0;
@@ -30,7 +29,6 @@ int main(int ac, char **av)
 	initial.readed = NULL;
 	initial.head = NULL;
 	initial.monty_file = NULL;
-
 	if (ac != 2)
 	{
 		dprintf(2, "USAGE: monty file\n");
