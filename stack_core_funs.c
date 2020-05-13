@@ -21,7 +21,10 @@ void pint(stack_t **stack, unsigned int line_number)
 
 	if (!(*stack))
 	{
-		printf("L%d : can't pint, stack empty", initial.line_cnt);
+		printf("L%d: can't pint, stack empty", initial.line_cnt);
+		free_dlistint(initial.head);
+		free(initial.readed);
+		fclose(initial.monty_file);
 		exit(EXIT_FAILURE);
 	}
 
