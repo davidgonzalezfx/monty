@@ -1,8 +1,7 @@
-# this is a comment
+#comment monty
 push 1
+# comment 2
 push 2
-push 6
-        # this is other comment
-push 3
-mod
+#comment 3
+add
 pall
