@@ -13,12 +13,9 @@ global initial;
 int main(int ac, char **av)
 {
 	/* stack_t *stack = NULL; */
-	FILE *monty_file;
-	char *readed = NULL, *toks = NULL;
+	char *toks = NULL;
 	int tok_cnt = 0;
 	size_t len = 0;
-
-	stack_t *head = NULL;
 	instruction_t opcodes[9] = {
 		{"pall", pall}, {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"add", add}, {"nop", empty},
@@ -28,27 +25,30 @@ int main(int ac, char **av)
 	initial.op_code = NULL;
 	initial.number = 0;
 	initial.line_cnt = 1;
+	initial.readed = NULL;
+	initial.head = NULL;
+	initial.monty_file = NULL;
 
 	if (ac != 2)
 	{
 		dprintf(2, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	monty_file = fopen(av[1], "r");
-	if (!monty_file)
+	initial.monty_file = fopen(av[1], "r");
+	if (!initial.monty_file)
 	{
 		dprintf(2, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
-	while (getline(&readed, &len, monty_file) != -1)
+	while (getline(&(initial.readed), &len, initial.monty_file) != -1)
 	{
-		toks = strtok(readed, " \t\n");
-		monty_logic(toks, tok_cnt, &head, opcodes);
+		toks = strtok(initial.readed, " \t\n");
+		monty_logic(toks, tok_cnt, &(initial.head), opcodes);
 		initial.line_cnt++;
 		tok_cnt = 0;
 	}
-	free_dlistint(head);
-	free(readed);
-	fclose(monty_file);
+	free_dlistint(initial.head);
+	free(initial.readed);
+	fclose(initial.monty_file);
 	return (0);
 }

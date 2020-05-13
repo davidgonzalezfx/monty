@@ -6,25 +6,6 @@
 #include <string.h>
 #include <ctype.h>
 /**
- * struct dat - handle variables to modes
- * @mode: the monty mode
- * @op_code: first token to validar with commands
- * @number: integer to put in the stack or queue
- * @line_cnt: counter for lines in .m file
- * Description: opcode and its function
- * for stack, queues, LIFO, FIFO Holberton project
- */
-typedef struct dat
-{
-	int mode;
-	char *op_code;
-	int number;
-	int line_cnt;
-} global;
-
-extern global initial;
-
-/**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
  * @prev: points to the previous element of the stack (or queue)
@@ -40,6 +21,30 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
+/**
+ * struct dat - handle variables to modes
+ * @mode: the monty mode
+ * @op_code: first token to validar with commands
+ * @number: integer to put in the stack or queue
+ * @line_cnt: counter for lines in .m file
+ * @readed: buffer used in getline
+ * @head: stack/queue pointer
+ * @monty_file: .m file
+ * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
+typedef struct dat
+{
+	int mode;
+	char *op_code;
+	int number;
+	int line_cnt;
+	char *readed;
+	stack_t *head;
+	FILE *monty_file;
+} global;
+
+extern global initial;
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode

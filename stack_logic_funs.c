@@ -34,6 +34,9 @@ void handle_errors(void)
 	else
 		dprintf(2, "L%d: unknown instruction: %s\n", initial.line_cnt,
 				initial.op_code);
+	free_dlistint(initial.head);
+	free(initial.readed);
+	fclose(initial.monty_file);
 	exit(EXIT_FAILURE);
 }
 
