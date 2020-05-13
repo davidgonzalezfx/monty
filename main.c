@@ -18,16 +18,16 @@ int main(int ac, char **av)
 	int tok_cnt = 0;
 	size_t len = 0;
 
-	initial.mode = 0;
-	initial.op_code = NULL;
-	initial.number = 0;
-	initial.line_cnt = 1;
-
 	stack_t *head = NULL;
 	instruction_t opcodes[9] = {
 		{"pall", pall}, {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"add", add}, {"nop", empty},
 		{"push", push}, {"queue", empty}, {"stack", empty}};
+
+	initial.mode = 0;
+	initial.op_code = NULL;
+	initial.number = 0;
+	initial.line_cnt = 1;
 
 	if (ac != 2)
 	{
