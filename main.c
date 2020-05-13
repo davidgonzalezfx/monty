@@ -36,7 +36,7 @@ int main(int ac, char **av)
 	while (getline(&readed, &len, monty_file) != -1)
 	{
 		toks = strtok(readed, " \t\n");
-		temp(toks, tok_cnt, &initial);
+		monty_logic(toks, tok_cnt, &initial);
 		initial.line_cnt++;
 		tok_cnt = 0;
 	}

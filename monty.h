@@ -53,20 +53,24 @@ typedef struct instruction_s
 } instruction_t;
 
 /* stack_aux_funs.c */
-stack_t *add_dnodeint(stack_t **head, const int n);
-stack_t *add_dnodeint_end(stack_t **head, const int n);
-void free_dlistint(stack_t *head);
 int delete_dnodeint_at_index(stack_t **head, unsigned int index);
+stack_t *add_dnodeint_end(stack_t **head, const int n);
+stack_t *add_dnodeint(stack_t **head, const int n);
 size_t print_dlistint(const stack_t *h);
-void temp(char *toks, int tok_cnt, global *initial);
-int validate_opcode(global *initial, char *s, instruction_t opcodes[]);
+void free_dlistint(stack_t *head);
 
-void print_error_num(global *initial);
+/* stack_core_funs.c */
+void swap(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
-void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
+
+/* stack_logic_funs.c */
+int validate_opcode(global *initial, char *s, instruction_t opcodes[]);
+void monty_logic(char *toks, int tok_cnt, global *initial);
+void empty(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
+void handle_errors(global *initial);
 
 #endif /* MONTY_H */
