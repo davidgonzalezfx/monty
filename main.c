@@ -16,10 +16,12 @@ int main(int ac, char **av)
 	char *toks = NULL;
 	int tok_cnt = 0;
 	size_t len = 0;
-	instruction_t opcodes[9] = {
+	instruction_t opcodes[13] = {
 		{"pall", pall}, {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"add", add}, {"nop", empty},
-		{"push", push}, {"queue", empty}, {"stack", empty}};
+		{"sub", sub}, {"div", _div}, {"mul", mul},
+		{"mod", mod}, {"push", push}, {"queue", empty},
+		{"stack", empty}};
 
 	initial.mode = 0;
 	initial.op_code = NULL;

@@ -1,2 +1,6 @@
 push 1
-add
+push 2
+push 3
+push 4
+mod 
+pall
