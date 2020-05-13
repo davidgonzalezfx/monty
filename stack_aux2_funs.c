@@ -52,7 +52,7 @@ void pstr(stack_t **stack, unsigned int line_number)
 	}
 	while (aux->next)
 		aux = aux->next;
-	while (aux->prev)
+	while (aux)
 	{
 		if (isascii(aux->n) == 0 || aux->n == 0)
 			break;
