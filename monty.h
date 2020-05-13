@@ -8,12 +8,14 @@
 /**
  * struct dat - handle variables to modes
  * @mode: the monty mode
- * @opcode: first token to validar with commands
+ * @op_code: first token to validar with commands
  * @number: integer to put in the stack or queue
+ * @line_cnt: counter for lines in .m file
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO Holberton project
  */
-typedef struct dat {
+typedef struct dat
+{
 	int mode;
 	char *op_code;
 	int number;
@@ -56,7 +58,15 @@ stack_t *add_dnodeint_end(stack_t **head, const int n);
 void free_dlistint(stack_t *head);
 int delete_dnodeint_at_index(stack_t **head, unsigned int index);
 size_t print_dlistint(const stack_t *h);
+void temp(char *toks, int tok_cnt, global *initial);
+int validate_opcode(global *initial, char *s, instruction_t opcodes[]);
 
 void print_error_num(global *initial);
+void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void push(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */
