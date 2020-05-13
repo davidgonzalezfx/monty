@@ -85,7 +85,23 @@ void swap(stack_t **stack, unsigned int line_number)
  */
 void add(stack_t **stack, unsigned int line_number)
 {
-	(void) stack;
+	stack_t *aux = *stack;
+	int len = dlistint_len(*stack);
+	int tmp;
 	(void) line_number;
-	printf("add called\n");
+
+	if (len < 2)
+	{
+		dprintf(2, "L%d: can't add, stack too short\n", initial.line_cnt);
+		free_dlistint(initial.head);
+		free(initial.readed);
+		fclose(initial.monty_file);
+		exit(EXIT_FAILURE);
+	}
+
+	while (aux->next)
+		aux = aux->next;
+	tmp = aux->n + aux->prev->n;
+	aux->prev->n = tmp;
+	delete_dnodeint_at_end(stack);
 }
