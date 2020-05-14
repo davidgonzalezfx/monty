@@ -95,9 +95,10 @@ void monty_logic(char *toks, int tok_cnt, stack_t **head,
 {
 	int is_valid;
 
-
 	while (toks && tok_cnt < 2)
 	{
+		if (toks[0] == '#')
+			return;
 		if (tok_cnt == 0)
 		{
 			/* validar por stack - queue or op_code */ /* *opcodes[] */
