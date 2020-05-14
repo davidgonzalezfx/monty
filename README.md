@@ -16,4 +16,5 @@
 #### Project files
 
 #### Authors
-
+Jairo Sandoval - [@sandovbarr](https://github.com/sandovbarr)<br>
+David Gonzalez - [@davidgonzalezfx](https://github.com/davidgonzalezfx)<br>
