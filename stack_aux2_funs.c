@@ -61,3 +61,32 @@ void pstr(stack_t **stack, unsigned int line_number)
 	}
 	printf("\n");
 }
+
+/**
+ * rotl - rotate the stack to the top
+ * @stack: stack/queue structure
+ * @line_number: line_cnt
+ */
+void rotl(stack_t **stack, unsigned int line_number)
+{
+	stack_t *aux = *stack;
+	(void)line_number;
+
+	if (!*stack || !stack || !(*stack)->next)
+		return;
+
+	while (aux->next)
+		aux = aux->next;
+	add_dnodeint(stack, aux->n);
+	delete_dnodeint_at_end(stack);
+}
+/**
+ * rotr - rotates the stack to the bottom
+ * @stack: stack/queue structure
+ * @line_number: line_cnt
+ */
+void rotr(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+}
