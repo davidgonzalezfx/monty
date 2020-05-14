@@ -95,8 +95,7 @@ void monty_logic(char *toks, int tok_cnt, stack_t **head,
 {
 	int is_valid;
 
-	if (toks[0] == '#')
-		return;
+
 	while (toks && tok_cnt < 2)
 	{
 		if (tok_cnt == 0)
