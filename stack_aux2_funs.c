@@ -87,6 +87,16 @@ void rotl(stack_t **stack, unsigned int line_number)
  */
 void rotr(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
+	stack_t *aux = *stack;
 	(void)line_number;
+
+	if (!*stack || !stack || !(*stack)->next)
+		return;
+
+	add_dnodeint_end(stack, (*stack)->n);
+	aux = aux->next;
+	free(*stack);
+	*stack = aux;
+	if (*stack)
+		(*stack)->prev = NULL;
 }
