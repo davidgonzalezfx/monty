@@ -110,3 +110,17 @@ $ ./monty 03.m
 1
 ```
 
+#### Project files
+| File | Description/functions |
+|-------|-----------|
+| **[README.md](./README.md)** | *All what you need to understand this project*|
+| **[main.c](./main.c)** | *Entry point function of project* |
+| **[monty.h](./monty.h)** | **Header File**: contains all prototypes |
+| **[stack_aux_funs.c](./stack_aux_funs.c)** | **delete_dnodeint_at_end**: deletes the node at end <br> **add_dnodeint_end**: adds a new node at the end <br> **add_dnodeint**: adds a new node at the beginning <br> **print_dlistint**: prints all the elements of a stack_t list <br> **free_dlistint**: free a stack_t list |
+| **[stack_aux2_funs.c](./stack_aux2_funs.c)** | **dlistint_len**: return length of linkedlist <br> **is_num**: check if string is a number <br> **pstr**: prints the string starting at the top of the stack <br> **rotl**: rotate the stack to the top <br> **rotr**: rotate the stack to the bottom |
+| **[stack_core_funs.c](./stack_core_funs.c)** | **swap**: swap last two elements  <br> **pall**: print all function <br> **pint**: print top element <br> **pop**: remove top element <br> **add**: add last to elements in one |
+| **[stack_logic_funs.c](./stack_logic_funs.c)** | **validate_opcode**: function that validates first token against valid opcodes in dictonary <br> **monty_logic**: core project <br> **empty**: function for non executable op_codes <br> **push**: fuction to push elements <br> **handle_errors**:print errors handler |
+| **[stack_advanced_funs.c](./stack_advanced_funs.c)** | **sub**: sub last to elements in one <br> **_div**: div last to elements in one <br> **mul**: mul last to elements in one <br> **mod**:  mod last to elements in one <br> **pchar** :prints the char at the top of the stack <br> |
+
+Jairo Sandoval - [@sandovbarr](https://github.com/sandovbarr)<br>
+David Gonzalez - [@davidgonzalezfx](https://github.com/davidgonzalezfx)<br>
