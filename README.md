@@ -6,15 +6,9 @@
 <h3 align="center"> Stack, Queues - LIFO, FIFO </h3>
 
 #### Description
+We built and monty files (.m) interpreter with C programming language. Monty 0.98 is a scripting language that is first compiled into Monty byte codes. It relies on a unique stack, with specific instructions to manipulate it. We implement some op_codes like add, pop and print elements from the stack/queue.
 
-#### Usage
+**Monty byte code files**
 
-#### Valid op_codes
+Files containing Monty byte codes usually have the .m extension. Most of the industry uses this standard but it is not required by the specification of the language. There is not more than one instruction per line. There can be any number of spaces before or after the opcode and its argument:
 
-#### Examples
-
-#### Project files
-
-#### Authors
-Jairo Sandoval - [@sandovbarr](https://github.com/sandovbarr)<br>
-David Gonzalez - [@davidgonzalezfx](https://github.com/davidgonzalezfx)<br>
