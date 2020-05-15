@@ -12,3 +12,12 @@ We built and monty files (.m) interpreter with C programming language. Monty 0.9
 
 Files containing Monty byte codes usually have the .m extension. Most of the industry uses this standard but it is not required by the specification of the language. There is not more than one instruction per line. There can be any number of spaces before or after the opcode and its argument:
 
+#### Usage
+You have to clone this repo and compile with gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic 
+``` bash
+$ git clone https://github.com/davidgonzalezfx/monty
+$ cd monty
+$ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
+$ ./monty 001.m
+```
+
