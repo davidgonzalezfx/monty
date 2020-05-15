@@ -41,3 +41,72 @@ $ ./monty 001.m
 - [X] **stack**: sets the format of the data to a stack (LIFO). This is the default behavior of the program
 - [X] **queue**: sets the format of the data to a queue (FIFO)
 
+#### Examples
+
+``` bash
+$ cat 00.m
+push 0 working with stacks
+push 1
+push 2
+  push 3
+                   pall
+      push    4        
+pall
+pint
+$ ./monty 00.m
+3
+2
+1
+0
+4
+3
+2
+1
+0
+4
+```
+``` bash
+$ cat 01.m
+push 1
+push 2
+push 3
+pall
+pop
+pint
+$ ./monty 01.m
+3
+2
+1
+2
+```
+``` bash
+$ cat 02.m
+push 1
+push 2
+push 3
+pall
+swap
+$ ./monty 02.m
+3
+2
+1
+2
+3
+1
+```
+``` bash
+$ cat 03.m
+push 1
+push 2
+push 3
+pall
+add
+pall
+$ ./monty 03.m
+3
+2
+1
+5
+1
+```
+
