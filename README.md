@@ -21,3 +21,23 @@ $ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
 $ ./monty 001.m
 ```
 
+#### Valid op_codes
+- [X] **push**: pushes an element to the stack
+- [X] **pall**: prints all the values on the stack
+- [X] **pint**: prints the value at the top of the stack
+- [X] **pop**:  removes the top element of the stack
+- [X] **swap**: swaps the top two elements of the stack
+- [X] **add**: adds the top two elements of the stack
+- [X] **nop**: doesn’t do anything
+- [X] **sub**: subtracts the top element of the stack from the second top element of the stack
+- [X] **div**: divides the second top element of the stack by the top element of the stack
+- [X] **mul**: multiplies the second top element of the stack with the top element of the stack
+- [X] **mod**: computes the rest of the division of the second top element of the stack by the top element of the stack
+- [X] **\#:** Every good language comes with the capability of commenting. 
+- [X] **pchar**: prints the char at the top of the stack
+- [X] **pstr**: prints the string starting at the top of the stack
+- [X] **rotl**: rotates the stack to the top
+- [X] **rotr**: rotates the stack to the bottom
+- [X] **stack**: sets the format of the data to a stack (LIFO). This is the default behavior of the program
+- [X] **queue**: sets the format of the data to a queue (FIFO)
+
